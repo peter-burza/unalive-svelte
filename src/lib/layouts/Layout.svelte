@@ -16,6 +16,10 @@
   let data = $derived(calculateTimeLeft(birthDate, lifeExpentency));
 
   let percentage = $derived(getLifePercentageLived(birthDate, lifeExpentency));
+
+  function handleUpdateData(n, b, e) {
+    
+  }
 </script>
 
 {#if showModal}
