@@ -81,7 +81,7 @@
   --color-compliment: "";
   --color-gradient: "";
   --color-muted: ;
-  --color-link: #60a5fa;
+  --color-link: #4d85c9;
   --color-link-transparent: rgba(37, 99, 235, 0.1);
 
   --color-success: "";
@@ -593,21 +593,21 @@ progress {
   margin: 0.75rem 0;
 }
 
-progress::-webkit-progress-bar {
+/* progress::-webkit-progress-bar {
   background: var(--background-main);
   border: 1px solid var(--border-primary);
-  border-radius: var(--highlight-border-radius);
-}
+  border-radius: var(--highlight-border-radius); 
+}*/
 
 progress::-webkit-progress-value {
   background-color: var(--color-link);
   border-radius: var(--border-radius-small);
 }
 
-progress::-moz-progress-bar {
+/* progress::-moz-progress-bar {
   background-color: var(--color-link);
   border-radius: var(--border-radius-small);
-}
+} */
 
 fieldset {
   border: 1px solid var(--border-primary);

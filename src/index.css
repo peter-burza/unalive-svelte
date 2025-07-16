@@ -41,16 +41,16 @@ section {
   white-space: nowrap;
 }
 
-.progress-bar {
+/* .progress-bar {
   border-radius: 4rem;
   border: 2px solid var(--color-link);
-}
+} */
 
-.progress-bar > div {
+/* .progress-bar > div {
   padding: 0.8rem 1.4rem;
-}
+} */
 
-.progress-bar > div,
+/* .progress-bar > div,
 .progress-bar {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@ section {
 
 .progress-bar .bar-label {
   display: none;
-}
+} */
 
 .clocks-grid {
   display: grid;
@@ -334,14 +334,45 @@ footer a img {
   gap: 1rem;
 }
 
+.progress-bar {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  border: solid 2px var(--color-link);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.progress-bar > div:first-of-type,
+.progress-bar > div:last-of-type {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem;
+}
+
+.bar-label {
+  color: color-contrast(var(--color-link) vs white, black);
+}
+
+.progress-fill {
+  content: "";
+  position: absolute;
+  background-color: var(--color-link);
+  height: 100%;
+  z-index: -1;
+}
+
 @media (min-width: 640px) {
   .btns-container {
     width: fit-content;
   }
 
-  .progress-bar .bar-label {
+  /* .progress-bar .bar-label {
     display: inline;
-  }
+  } */
 
   .clocks-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -9,23 +9,63 @@
   function handleToggleModal() {
     showModal = !showModal;
   }
-  
-  let birthDate = $state("1998-12-08");
-  let lifeExpentency = $state(80);
-  let name = $state("peter");
+
+  let defaultName = 'Peter';
+  let defaultBD = '1998-12-08';
+  let defaultLE = 80;
+  let birthDate = $state(defaultBD);
+  let lifeExpentency = $state(defaultLE);
+  let name = $state(defaultName);
   let data = $derived(calculateTimeLeft(birthDate, lifeExpentency));
 
   let percentage = $derived(getLifePercentageLived(birthDate, lifeExpentency));
 
   function handleUpdateData(n, b, e) {
-    
+    if (!n || !b || !e) return;
+
+    // save to local storage
+    localStorage.setItem("formData", JSON.stringify({ name: n, birthDate: b, lifeExpentency: e }),)
+
+    name = n;
+    birthDate = b;
+    lifeExpentency = parseInt(e);
+    data = calculateTimeLeft(b, parseInt(e));
+    showModal = false;
   }
+
+  function resetData() {
+    name = defaultName;
+    birthDate = defaultBD;
+    lifeExpentency = defaultLE;
+    data = calculateTimeLeft(birthDate, parseInt(lifeExpentency));
+    localStorage.clear();
+  }
+
+  $effect(() => {
+    const interval = setInterval(() => {
+      data = calculateTimeLeft(defaultBD, parseInt(defaultLE));
+    }, 1000);
+    return () => clearInterval(interval)
+  })
+
+  $effect(() => {
+    if (!localStorage) { return; } // Gard Close
+    
+    if (localStorage.getItem('formData')) {
+      const {name: n, birthDate: b, lifeExpentency: e} = JSON.parse(localStorage.getItem('formData'))
+    name = n;
+    birthDate = b;
+    lifeExpentency = parseInt(e);
+    data = calculateTimeLeft(b, parseInt(e));
+    }
+  })
+
 </script>
 
 {#if showModal}
   <Portal handleCloseModal={handleToggleModal}>
     {#snippet form()}
-      <Form />
+      <Form {handleUpdateData} handleCloseModal={handleToggleModal} />
     {/snippet}
   </Portal>
 {/if}
@@ -42,6 +82,7 @@
     percentage,
     lifeExpentency,
     handleToggleModal,
+    resetData,
   })}
 </main>
 
