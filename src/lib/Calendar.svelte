@@ -9,7 +9,7 @@
 </script>
 
 <section id="calendar">
-  <p><i>Each square of dots represents 52 weeks / 1 year of your life.</i></p>
+  <p><i>Each group of dots represents 52 weeks / 1 year of your life.</i></p>
 
   <div class="dozen-grid">
     {#each yearsArr as year, yearIndex}
